@@ -15,9 +15,11 @@
         <meta property="og:locale" content="en_US">
         <meta property="og:title" content="It's a Burgermergency!!!">
         <meta property="og:description" content="If you have a burgermergency, you need to find the nearest burger--stat!">
-        <meta property="og:url" content="http://burgermergency.com/">
+        <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:site_name" content="Matt Stauffer">
         <meta property="og:image" content="http://burgermergency.com/og-burger.png"> 
+        <meta property="og:image:width" content="1200"> 
+        <meta property="og:image:height" content="630"> 
 
         <style>
             html, body {
