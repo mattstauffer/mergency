@@ -56,7 +56,7 @@
                     $first = current($results->businesses)
                 @endphp
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
-                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}"><button>Update Location</button></form></div>
+                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus><button>Update Location</button></form></div>
 
                 <br>
                 <iframe
