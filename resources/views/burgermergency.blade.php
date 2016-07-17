@@ -8,21 +8,16 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
         <meta name="twitter:title" content="It's a Burgermergency!!!">
-        <meta name="twitter:description" content="If you have a burgermergency, you know where to go.">
+        <meta name="twitter:description" content="If you have a burgermergency, you need to find the nearest burger--stat!.">
         <meta name="twitter:image" content="http://burgermergency.com/twitter-burger.png">
         <meta name="twitter:creator" content="@stauffermatt">
 
-<meta property="og:locale" content="en_US" />
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Please remember my Black son - Matt Stauffer" />
-<meta property="og:description" content="This picture is my family. That White guy is me. That&#039;s my beautiful wife next to me, and probably the most incredible child to ever live, Chi." />
-<meta property="og:url" content="https://mattstauffer.org/257/please-remember-my-black-son/" />
-<meta property="og:site_name" content="Matt Stauffer" />
-<meta property="article:section" content="Race and ethnicity" />
-<meta property="article:published_time" content="2016-07-11T07:44:04-04:00" />
-<meta property="article:modified_time" content="2016-07-11T12:06:40-04:00" />
-<meta property="og:updated_time" content="2016-07-11T12:06:40-04:00" />
-<meta property="og:image" content="https://mattstauffer.org/wp-content/uploads/2016/07/13508931_1215891835128282_3050779368487096598_n.jpg" />        
+        <meta property="og:locale" content="en_US">
+        <meta property="og:title" content="It's a Burgermergency!!!">
+        <meta property="og:description" content="If you have a burgermergency, you need to find the nearest burger--stat!">
+        <meta property="og:url" content="http://burgermergency.com/">
+        <meta property="og:site_name" content="Matt Stauffer">
+        <meta property="og:image" content="https://mattstauffer.org/wp-content/uploads/2016/07/13508931_1215891835128282_3050779368487096598_n.jpg"> 
 
         <style>
             html, body {
