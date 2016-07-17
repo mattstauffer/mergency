@@ -45,4 +45,8 @@ return [
         'token' => env('YELP_TOKEN'),
         'tokenSecret' => env('YELP_TOKEN_SECRET')
     ],
+
+    'google' => [
+        'maps' => env('GOOGLE_MAPS_KEY'),
+    ],
 ];

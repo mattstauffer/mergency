@@ -1,6 +1,14 @@
 <?php
 
 Route::get('/', function () {
+    return redirect('/Chicago, IL');
+});
+
+Route::post('search', function (Illuminate\Http\Request $request) {
+    return redirect('/' . $request->input('location'));
+});
+
+Route::get('{search}', function ($search) {
     // todo move to service provider
     $client = new Stevenmaguire\Yelp\Client([
         'consumerKey' => config('services.yelp.key'), 
@@ -11,12 +19,16 @@ Route::get('/', function () {
     ]);
 
     // todo get their location
+    // https://packagist.org/packages/stevebauman/location ?
+    // probably browser instead.. will require SSL though
     $minutes = 30;
-    $results = Cache::remember('yelp:Chicago, IL', $minutes, function () use ($client) {
-        return $client->search(['term' => 'Burgers', 'location' => 'Chicago, IL']);
+    $results = Cache::remember('yelp:' . $search, $minutes, function () use ($client, $search) {
+        return $client->search(['term' => 'Burgers', 'location' => $search]);
     });
 
-    return view('burgermergency')->with('results', $results);
+    return view('burgermergency')
+        ->with('results', $results)
+        ->with('search', $search);
 
     // todo make a nice display, maybe one on a map
     // todo: figure out how to set the scope/distance properly. we need at LEAST one result...

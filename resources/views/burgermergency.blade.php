@@ -37,6 +37,15 @@
             .direction {
                 font-size: 56px;
             }
+
+            .location-box {
+                margin-top: 4em;
+            }
+
+            .location-box input, .location-box button {
+                font-size: 38px;
+                margin-left: 1em;
+            }
         </style>
     </head>
     <body>
@@ -47,7 +56,16 @@
                     $first = current($results->businesses)
                 @endphp
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
-                (not splat in the middle of Chicago, IL? Tough beans, you'll have to wait until this app is better and gets your actual location)
+                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}"><button>Update Location</button></form></div>
+
+                <br>
+                <iframe
+                  width="600"
+                  height="450"
+                  frameborder="0" style="border:0"
+                  src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers
+                  &center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}" allowfullscreen>
+                </iframe>
             </div>
         </div>
     </body>
