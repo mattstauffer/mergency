@@ -82,7 +82,7 @@
                   &center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}" allowfullscreen>
                 </iframe>
 
-                <div class="credits">Logo by stolkramaker for the Noun Project</div>
+                <div class="credits">Logo by stolkramaker for the Noun Project | <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
             </div>
         </div>
     </body>
