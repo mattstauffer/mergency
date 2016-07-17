@@ -73,14 +73,15 @@
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
                 <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus><br><button>Update Location</button></form></div>
 
-                <br>
+                <br>{{--
                 <iframe
                   width="600"
                   height="450"
                   frameborder="0" style="border:0"
                   src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers
                   &center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}" allowfullscreen>
-                </iframe>
+                </iframe>--}}
+                <br><br><br><br><br><br>
 
                 <div class="credits">Logo by stolkramaker for the Noun Project | <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
             </div>
