@@ -5,6 +5,13 @@
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@stauffermatt">
+        <meta name="twitter:title" content="It's a Burgermergency!!!">
+        <meta name="twitter:description" content="If you have a burgermergency, you know where to go.">
+        <meta name="twitter:image" content="http://burgermergency.com/twitter-burger.png">
+        <meta name="twitter:creator" content="@stauffermatt">
+
         <style>
             html, body {
                 height: 100%;
