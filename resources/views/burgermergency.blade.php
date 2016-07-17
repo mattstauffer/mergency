@@ -17,7 +17,7 @@
         <meta property="og:description" content="If you have a burgermergency, you need to find the nearest burger--stat!">
         <meta property="og:url" content="http://burgermergency.com/">
         <meta property="og:site_name" content="Matt Stauffer">
-        <meta property="og:image" content="https://mattstauffer.org/wp-content/uploads/2016/07/13508931_1215891835128282_3050779368487096598_n.jpg"> 
+        <meta property="og:image" content="http://burgermergency.com/og-burger.png"> 
 
         <style>
             html, body {
