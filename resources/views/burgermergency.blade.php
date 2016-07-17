@@ -3,7 +3,7 @@
     <head>
         <title>Burgermergency</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400" rel="stylesheet" type="text/css">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
@@ -25,6 +25,7 @@
 html, body {
                 background: #e5c202;
                 height: 100%;
+                padding: 50px; 
             }
 
             body {
