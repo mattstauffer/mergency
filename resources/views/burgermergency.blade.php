@@ -22,7 +22,8 @@
         <meta property="og:image:height" content="630"> 
 
         <style>
-            html, body {
+html, body {
+                background: #e5c202;
                 height: 100%;
             }
 
