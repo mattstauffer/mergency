@@ -95,19 +95,21 @@
                 <img src="burger.png" alt="Burger" class="burger"><br><br>
                 <div class="title">It's a burgermergency!</div>
                 @php
-                    $first = current($results->businesses)
+                    $first = $shops->first();
                 @endphp
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
                 <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus id="locationBox"><br><button>Update Location</button></form></div>
 
-                <br>{{--
+                <br><br>
+                <p>Or, let Google Maps suggest based on your browser's location:</p>
+                <br>
                 <iframe
                   width="600"
                   height="450"
                   frameborder="0" style="border:0"
                   src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers
-                  &center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}" allowfullscreen>
-                </iframe>--}}
+                  {{--&center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}--}}" allowfullscreen>
+                </iframe>
                 <br><br><br><br><br><br>
 
                 <div class="credits">Logo by stolkramaker for the Noun Project | <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>

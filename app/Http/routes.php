@@ -26,8 +26,16 @@ Route::get('{search}', function ($search) {
         return $client->search(['term' => 'Burgers', 'location' => $search]);
     });
 
+    // Only businesses that have not been permanently closed
+    $shops = collect($results->businesses)->reject(function ($shop) {
+        return $shop->is_closed;
+    });
+
+    // todo can we figure out how to only show those that are open RIGHT NOW?
+    
     return view('burgermergency')
         ->with('results', $results)
+        ->with('shops', $shops)
         ->with('search', $search);
 
     // todo make a nice display, maybe one on a map
