@@ -39,4 +39,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'yelp' => [
+        'key' => env('YELP_KEY'),
+        'secret' => env('YELP_SECRET'),
+        'token' => env('YELP_TOKEN'),
+        'tokenSecret' => env('YELP_TOKEN_SECRET')
+    ],
 ];
