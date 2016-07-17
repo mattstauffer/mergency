@@ -22,10 +22,17 @@
         <meta property="og:image:height" content="630"> 
 
         <style>
-html, body {
+
+            /* apply a natural box layout model to all elements, but allowing components to change */
+            html {
+              box-sizing: border-box;
+            }
+            *, *:before, *:after {
+              box-sizing: inherit;
+            }
+            html, body {
                 background: #e5c202;
                 height: 100%;
-                padding: 50px; 
             }
 
             body {
@@ -44,12 +51,14 @@ html, body {
             }
 
             .content {
+                padding: 50px; 
                 text-align: center;
                 display: inline-block;
             }
 
             .title {
                 font-size: 96px;
+                width: 100vw;
             }
 
             .direction {
@@ -89,7 +98,7 @@ html, body {
                     $first = current($results->businesses)
                 @endphp
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
-                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus><br><button>Update Location</button></form></div>
+                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus id="locationBox"><br><button>Update Location</button></form></div>
 
                 <br>{{--
                 <iframe
@@ -104,5 +113,12 @@ html, body {
                 <div class="credits">Logo by stolkramaker for the Noun Project | <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
             </div>
         </div>
+
+        <script>
+            var input = document.getElementById('locationBox');
+
+            input.focus();
+            input.select();
+        </script>
     </body>
 </html>
