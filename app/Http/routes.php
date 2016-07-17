@@ -1,28 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', function () {
-    $client = new Stevenmaguire\Yelp\Client(array(
+    // todo move to service provider
+    $client = new Stevenmaguire\Yelp\Client([
         'consumerKey' => config('services.yelp.key'), 
         'consumerSecret' => config('services.yelp.secret'),
         'token' => config('services.yelp.token'),
         'tokenSecret' => config('services.yelp.tokenSecret'),
         'apiHost' => 'api.yelp.com' // Optional, default 'api.yelp.com'
-    ));
+    ]);
 
-    $results = $client->search(['term' => 'Hamburger', 'location' => 'Chicago, IL']);
+    // todo get their location
+    $minutes = 30;
+    $results = Cache::remember('yelp:Chicago, IL', $minutes, function () use ($client) {
+        return $client->search(['term' => 'Burgers', 'location' => 'Chicago, IL']);
+    });
 
-    dd($results);
+    return view('burgermergency')->with('results', $results);
+
+    // todo make a nice display, maybe one on a map
+    // todo: figure out how to set the scope/distance properly. we need at LEAST one result...
 
     // Shape of the results:
     //
