@@ -48,5 +48,6 @@ return [
 
     'google' => [
         'maps' => env('GOOGLE_MAPS_KEY'),
+        'analytics' => env('GA_ID'),
     ],
 ];
