@@ -2,6 +2,21 @@
 <html>
     <head>
         <title>Burgermergency</title>
+        <!--
+            If you're reading this, I'm sorry.
+
+            I'm actually an accomplished frontend web developer... despite how it may seem.
+
+            Accomplished enough that it's paining me to put this online looking like this.
+
+            But I'm trying to keep this development rapid because I really shouldn't even be working on it.
+
+            I mean. It's an app about hamburgers. My company is hiring and my wife is about to give birth.
+
+            And I'm working on an app about hamburgers.
+
+            So. Please excuse the mess. <3
+        -->
 
         <link href="https://fonts.googleapis.com/css?family=Lato:400" rel="stylesheet" type="text/css">
 
@@ -71,6 +86,7 @@
 
             .location-box {
                 background: #fff;
+                border-radius: 0.5em;
                 font-size: 50px;
                 margin: 0.5em auto 1em;
                 max-width: 1000px;
