@@ -80,15 +80,19 @@
             }
 
             .location-box button, .js-find {
-                background: #eee;
-                border: 1px solid #999;
-                font-size: 24px;
-                margin-top: 0.5em;
-                padding: 0.5em;
+                background: #fff;
+                border: 2px solid #444;
+                display: inline-block;
+                font-size: 28px;
+                margin: 0.5em auto;
+                padding: 0.5em 1em;
             }
 
                 .js-find {
+                    border: 1px solid #555;
                     cursor: pointer;
+                    font-size: 18px;
+                    margin-top: 2em;
                 }
 
                 .js-find-loader {
@@ -117,17 +121,6 @@
                 
                 <div class="title">It's a burgermergency!</div>
 
-                <div class="location-box">Where are you?
-                    <form action="/search" method="POST">
-                        {{ csrf_field() }}
-                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" autofocus id="locationBox">
-                        <br>
-                        <button>Find me a burger!</button>
-                    </form>
-                    <a class="js-find hidden" id="js-find">Get my browser location</a>
-                    <span class="js-find-loader" id="js-find-loader">Location loading...</span>
-                </div>
-
                 @if ($search)
                     @php
                         $first = $shops->first();
@@ -136,10 +129,24 @@
                 @else 
                     <div class="direction">Fill out a location above to get your closest burger!</div>
                 @endif
-
+                
                 @if (substr($search, 0, 7) === 'latlon:')
-                    <p style="font-size: 18px;">Current location provided by your browser.<br>{{ $search }}</p>
+                    <p style="font-size: 12px; color: rgba(0, 0, 0, 0.5)">Current location provided by your browser.<br>{{ $search }}</p>
                 @endif
+
+                <br><br>
+
+                <div class="location-box">Where are you?
+                    <form action="/search" method="POST">
+                        {{ csrf_field() }}
+                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" autofocus id="locationBox">
+                        <br>
+                        <button>BURGER ME!</button>
+                    </form>
+                    <a class="js-find hidden" id="js-find">Get my browser location</a>
+                    <span class="js-find-loader" id="js-find-loader">Location loading...</span>
+                </div>
+
 
                 <br><br><br><br>
 
