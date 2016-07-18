@@ -236,7 +236,11 @@
                 };
                 
             } else {
-                console.log('Geolocation is not supported for this Browser/OS version yet.');
+                console.log('Geolocation is not supported for this Browser/OS version yet');
+                var $loader = document.getElementById('js-find-loader');
+
+                $loader.classList.add('error-message');
+                $loader.innerHTML = "Your browser doesn't support location services.";
             }
         </script>
     </body>
