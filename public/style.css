@@ -1,0 +1,111 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+    background: #e5c202;
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    display: table;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 50px;
+}
+
+.burger {
+    max-height: 40vh;
+    max-width: 66%;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 9vw;
+}
+
+@media only screen and (min-width: 1200px) {
+    .title {
+        font-size: 6em;
+    }
+}
+
+.restaurant {
+    background: #fff;
+    border-radius: 0.5em;
+    font-size: 2.5rem;
+    margin: 1em auto;
+    max-width: 800px;
+    padding: 1em;
+}
+
+    @media only screen and (min-width: 600px) {
+        .restaurant {
+            font-size: 3.5rem;
+        }
+    }
+    .restaurant__details {
+        font-size: 1.5rem;
+        margin-top: 1em;
+    }
+
+    .location-box {
+        background: #fff;
+        border-radius: 0.5em;
+        font-size: 3rem;
+        margin: 0.5em auto 1em;
+        max-width: 800px;
+        padding: 1em;
+    }
+
+    .location-box input, .location-box button {
+        border: 2px solid #111;
+        font-size: 2.25rem;
+        padding: 0.25em;
+    }
+
+    .location-box button, .js-find {
+        background: #e5c202;
+        display: inline-block;
+        font-size: 1.75rem;
+        margin: 0.5em auto;
+        padding: 0.5em 1em;
+    }
+
+        .js-find {
+            background: #eee;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-size: 1.25rem;
+            margin-top: 2em;
+        }
+
+        .js-find-loader {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 1.25rem;
+        }
+
+        .js-find-loader.error-message {
+            font-size: 1rem;
+        }
+
+    .hidden {
+        display: none; 
+    }

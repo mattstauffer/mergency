@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Burgermergency</title>
+        <title>{{ $shops->isEmpty() ? '' : $shops->first()->name . ' | ' }}Burgermergency</title>
         <!--
             If you're reading this, I'm sorry.
 
@@ -18,7 +18,9 @@
             So. Please excuse the mess. <3
         -->
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:400" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
@@ -36,103 +38,7 @@
         <meta property="og:image:width" content="1200"> 
         <meta property="og:image:height" content="630"> 
 
-        <style>
-            /* apply a natural box layout model to all elements, but allowing components to change */
-            html {
-              box-sizing: border-box;
-            }
-            *, *:before, *:after {
-              box-sizing: inherit;
-            }
-
-            html, body {
-                background: #e5c202;
-                height: 100%;
-            }
-
-            img {
-                max-width: 100%;
-            }
-
-            body {
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-                width: 100%;
-            }
-
-            .content {
-                margin: 0 auto;
-                max-width: 1500px;
-                padding: 50px; 
-            }
-
-            .title {
-                font-size: 8.5vw;
-            }
-
-            @media only screen and (min-width: 1200px) {
-                .title {
-                    font-size: 96px;
-                }
-            }
-
-            .direction {
-                font-size: 56px;
-            }
-
-            .location-box {
-                background: #fff;
-                border-radius: 0.5em;
-                font-size: 50px;
-                margin: 0.5em auto 1em;
-                max-width: 1000px;
-                padding: 1em;
-            }
-
-            .location-box input, .location-box button {
-                border: 2px solid #111;
-                font-size: 38px;
-                padding: 0.25em;
-            }
-
-            .location-box button, .js-find {
-                background: #e5c202;
-                display: inline-block;
-                font-size: 28px;
-                margin: 0.5em auto;
-                padding: 0.5em 1em;
-            }
-
-                .js-find {
-                    background: #eee;
-                    border: 1px solid #555;
-                    cursor: pointer;
-                    font-size: 18px;
-                    margin-top: 2em;
-                }
-
-                .js-find-loader {
-                    color: rgba(0, 0, 0, 0.6);
-                    font-size: 20px;
-                }
-
-                .js-find-loader.error-message {
-                    font-size: 16px;
-                }
-
-            .burger {
-                max-height: 40vh;
-                margin: 0 auto;
-            }
-
-            .hidden {
-                display: none; 
-            }
-        </style>
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
         <div class="container">
@@ -142,16 +48,9 @@
                 <div class="title">It's a burgermergency!</div>
 
                 @if ($search)
-                    @php
-                        $first = $shops->first();
-                    @endphp
-                    <div class="direction"><br>Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
-                    @if (substr($search, 0, 7) === 'latlon:')
-                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.5)">Current location provided by your browser.<br>{{ $search }}</p>
-                    @endif
-                    <br><br>
+                    @include('partials.restaurant', ['restaurant' => $shops->first()])
                 @else 
-                    <div class="direction">Fill out a location below to get your closest burger!</div>
+                    <div class="restaurant">Fill out a location below to get your closest burger!</div>
                 @endif
                 
                 <br><br>
@@ -160,7 +59,7 @@
                     Where are you?
                     <form action="/search" method="POST">
                         {{ csrf_field() }}
-                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" autofocus id="locationBox">
+                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" {{ Request::path() == '' ? 'autofocus' : '' }} id="locationBox">
                         <br>
                         <button>BURGER ME!</button>
                     </form>
@@ -169,19 +68,18 @@
                 </div>
 
 
+                {{--
                 <br><br><br><br>
 
                 <p>Or, let Google Maps suggest based on your browser's location:</p>
                 <br>
-
                 <iframe
                   width="600"
                   height="450"
                   frameborder="0" style="border:0"
-                  src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers
-                  {{--&center={{ $results->region->center->latitude }},{{ $results->region->center->longitude }}--}}" allowfullscreen>
+                  src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers" allowfullscreen>
                 </iframe>
-
+--}}
                 <br><br><br><br><br><br>
 
                 <div class="credits"><a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
@@ -189,9 +87,11 @@
         </div>
 
         <script>
-            var $input = document.getElementById('locationBox');
-            $input.focus();
-            $input.select();
+            if (window.location.pathname == '/') {
+                var $input = document.getElementById('locationBox');
+                $input.focus();
+                $input.select();
+            }
         </script>
 
         <script>
