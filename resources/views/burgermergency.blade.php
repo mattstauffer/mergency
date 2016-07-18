@@ -18,8 +18,6 @@
             So. Please excuse the mess. <3
         -->
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="twitter:card" content="summary_large_image">
@@ -38,12 +36,13 @@
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
 
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <img src="burger.png" alt="Burger" class="burger">
+                <img src="burger.png" class="burger" alt="Burger">
 
                 <h1 class="title">It's a burgermergency!</h1>
 
@@ -58,10 +57,17 @@
 
                     <form action="/search" method="POST">
                         {{ csrf_field() }}
-                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" {{ Request::path() == '' ? 'autofocus' : '' }} id="locationBox" placeholder="600 E Grand Ave, Chicago, IL" style="width: 100%">
-                        <br>
+                        <input
+                            type="text"
+                            name="location"
+                            value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}"
+                            {{ Request::path() == '' ? 'autofocus' : '' }}
+                            id="locationBox"
+                            placeholder="600 E Grand Ave, Chicago, IL"
+                            style="width: 100%">
                         <button>BURGER ME!</button>
                     </form>
+
                     <a class="js-find hidden" id="js-find">Get my browser location</a>
                     <span class="js-find-loader" id="js-find-loader">Location loading...</span>
                 </div>
@@ -77,7 +83,9 @@
                 </iframe>
                 --}}
 
-                <div class="credits"><a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
+                <div class="credits">
+                    <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a>
+                </div>
             </div>
         </div>
 
