@@ -5,7 +5,11 @@
 
     <div class="restaurant__details">
         @include('partials.rating', ['restaurant' => $restaurant])
-        Phone: <a href="tel:{{ $restaurant->phone }}">{{ $restaurant->display_phone }}</a><br><br>
+        @if (isset($restaurant->phone))
+        Phone: <a href="tel:{{ $restaurant->phone }}">{{ $restaurant->display_phone }}</a>
+        @endif
+
+        <br><br>
 
         <strong>Getting there:</strong><br>
 
