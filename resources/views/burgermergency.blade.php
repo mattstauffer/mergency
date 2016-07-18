@@ -34,32 +34,31 @@
         <meta property="og:description" content="If you have a burgermergency, you need to find the nearest burger--stat!">
         <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:site_name" content="Matt Stauffer">
-        <meta property="og:image" content="http://burgermergency.com/og-burger.png"> 
-        <meta property="og:image:width" content="1200"> 
-        <meta property="og:image:height" content="630"> 
+        <meta property="og:image" content="http://burgermergency.com/og-burger.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
 
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <img src="burger.png" alt="Burger" class="burger"><br><br>
-                
-                <div class="title">It's a burgermergency!</div>
+                <img src="burger.png" alt="Burger" class="burger">
+
+                <h1 class="title">It's a burgermergency!</h1>
 
                 @if ($search)
                     @include('partials.restaurant', ['restaurant' => $shops->first()])
-                @else 
+                @else
                     <div class="restaurant">Fill out a location below to get your closest burger!</div>
                 @endif
-                
-                <br><br>
 
                 <div class="location-box">
                     Where are you?
+
                     <form action="/search" method="POST">
                         {{ csrf_field() }}
-                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" {{ Request::path() == '' ? 'autofocus' : '' }} id="locationBox">
+                        <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" {{ Request::path() == '' ? 'autofocus' : '' }} id="locationBox" placeholder="600 E Grand Ave, Chicago, IL" style="width: 100%">
                         <br>
                         <button>BURGER ME!</button>
                     </form>
@@ -67,10 +66,7 @@
                     <span class="js-find-loader" id="js-find-loader">Location loading...</span>
                 </div>
 
-
                 {{--
-                <br><br><br><br>
-
                 <p>Or, let Google Maps suggest based on your browser's location:</p>
                 <br>
                 <iframe
@@ -79,8 +75,7 @@
                   frameborder="0" style="border:0"
                   src="https://www.google.com/maps/embed/v1/place?key={{ config('services.google.maps') }}&q=burgers" allowfullscreen>
                 </iframe>
---}}
-                <br><br><br><br><br><br>
+                --}}
 
                 <div class="credits"><a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
             </div>
@@ -100,23 +95,21 @@
                 lon: null
             };
 
-            function activateButton()
-            {
+            var activateButton = function activateButton() {
                 document.getElementById('js-find').classList.remove('hidden');
-                hideLoader();
-            }
-
-            function hideLoader()
-            {
                 document.getElementById('js-find-loader').classList.add('hidden');
-            }
+            };
+
+            var handleButtonClick = function handleButtonClick() {
+                window.location = "/latlon:" + position.lat + "," + position.lon;
+            };
 
             var $getLocationButton = document.getElementById("js-find");
-            $getLocationButton.onclick = function() { clickButton(); return false; }
+            var $loader = document.getElementById('js-find-loader');
 
-            function clickButton()
-            {
-                window.location = "/latlon:" + position.lat + "," + position.lon;                
+            $getLocationButton.onclick = function () {
+                handleButtonClick();
+                return false;
             }
 
             if (navigator.geolocation) {
@@ -129,12 +122,8 @@
                     };
 
                     var geoSuccess = function (geoPosition) {
-                        console.log('Permission!');
-
                         position.lat = geoPosition.coords.latitude;
                         position.lon = geoPosition.coords.longitude;
-
-                        console.log(position);
 
                         activateButton();
                     };
@@ -149,23 +138,15 @@
                             3 : 'Timed out getting your location.'
                         };
 
-                        var $loader = document.getElementById('js-find-loader');
-
                         $loader.classList.add('error-message');
                         $loader.innerHTML = 'ERROR: ' + messages[error.code];
-                        // error.code can be:
-                        //   0: unknown error
-                        //   1: permission denied
-                        //   2: position unavailable (error response from location provider)
-                        //   3: timed out
                     };
 
                     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
                 };
-                
+
             } else {
                 console.log('Geolocation is not supported for this Browser/OS version yet');
-                var $loader = document.getElementById('js-find-loader');
 
                 $loader.classList.add('error-message');
                 $loader.innerHTML = "Your browser doesn't support location services.";
