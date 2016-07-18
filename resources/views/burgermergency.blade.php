@@ -66,7 +66,9 @@
             }
 
             .location-box {
-                margin-top: 4em;
+                font-size: 50px;
+                margin-bottom: 1em;
+                margin-top: 0.5em;
             }
 
             .location-box input, .location-box button {
@@ -79,7 +81,7 @@
                 background: #eee;
                 border: 1px solid #999;
                 font-size: 24px;
-                margin-top: 1em;
+                margin-top: 0.5em;
                 padding: 0.5em;
             }
 
@@ -94,12 +96,14 @@
             <div class="content">
                 <img src="burger.png" alt="Burger" class="burger"><br><br>
                 <div class="title">It's a burgermergency!</div>
+                <div class="location-box">Where are you? <form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus id="locationBox"><br><button>Find me a burger!</button></form></div>
+                @if ($search)
                 @php
                     $first = $shops->first();
                 @endphp
                 <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
-                <div class="location-box"><form action="/search" method="POST">{{ csrf_field() }}<input type="text" name="location" value="{{ $search }}" autofocus id="locationBox"><br><button>Update Location</button></form></div>
 
+                @endif
                 <br><br>
                 <p>Or, let Google Maps suggest based on your browser's location:</p>
                 <br>

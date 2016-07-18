@@ -1,7 +1,10 @@
 <?php
 
 Route::get('/', function () {
-    return redirect('/Chicago, IL');
+    return view('burgermergency')
+        ->with('results', null)
+        ->with('shops', collect([]))
+        ->with('search', null);
 });
 
 Route::post('search', function (Illuminate\Http\Request $request) {
