@@ -3,15 +3,15 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Stevenmaguire\Yelp\Client;
+use App\YelpClient;
 
 class YelpServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(Client::class, function () {
-            return new Client([
-                'consumerKey' => config('services.yelp.key'), 
+        $this->app->bind(YelpClient::class, function () {
+            return new YelpClient([
+                'consumerKey' => config('services.yelp.key'),
                 'consumerSecret' => config('services.yelp.secret'),
                 'token' => config('services.yelp.token'),
                 'tokenSecret' => config('services.yelp.tokenSecret'),

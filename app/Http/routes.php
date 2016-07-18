@@ -7,12 +7,12 @@ Route::get('/', function () {
         ->with('search', null);
 });
 
-Route::get('{search}', function ($search, Stevenmaguire\Yelp\Client $yelp) {
+Route::get('{search}', function ($search, App\YelpClient $yelp) {
     $minutes = 30;
 
     $results = Cache::remember('yelp:' . $search, $minutes, function () use ($yelp, $search) {
         if (substr($search, 0, 7) == 'latlon:') {
-            return $yelp->search(['term' => 'Burgers', 'cll' => substr($search, 7)]);
+            return $yelp->searchByLl(substr($search, 7), ['term' => 'Burgers']);
         }
 
         return $yelp->search(['term' => 'Burgers', 'location' => $search]);
@@ -22,7 +22,7 @@ Route::get('{search}', function ($search, Stevenmaguire\Yelp\Client $yelp) {
     $shops = collect($results->businesses)->reject(function ($shop) {
         return $shop->is_closed;
     });
-    
+
     return view('burgermergency')
         ->with('results', $results)
         ->with('shops', $shops)
