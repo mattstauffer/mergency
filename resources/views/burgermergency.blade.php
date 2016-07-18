@@ -51,6 +51,7 @@
 
             .content {
                 margin: 0 auto;
+                max-width: 1500px;
                 padding: 50px; 
             }
 
@@ -69,19 +70,21 @@
             }
 
             .location-box {
+                background: #fff;
                 font-size: 50px;
-                margin-bottom: 1em;
-                margin-top: 0.5em;
+                margin: 0.5em auto 1em;
+                max-width: 1000px;
+                padding: 1em;
             }
 
             .location-box input, .location-box button {
+                border: 2px solid #111;
                 font-size: 38px;
                 padding: 0.25em;
             }
 
             .location-box button, .js-find {
-                background: #fff;
-                border: 2px solid #444;
+                background: #e5c202;
                 display: inline-block;
                 font-size: 28px;
                 margin: 0.5em auto;
@@ -89,6 +92,7 @@
             }
 
                 .js-find {
+                    background: #eee;
                     border: 1px solid #555;
                     cursor: pointer;
                     font-size: 18px;
@@ -125,18 +129,19 @@
                     @php
                         $first = $shops->first();
                     @endphp
-                    <div class="direction">Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
+                    <div class="direction"><br>Go here now: <a href="{{ $first->url }}">{{ $first->name }}</a></div>
+                    @if (substr($search, 0, 7) === 'latlon:')
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.5)">Current location provided by your browser.<br>{{ $search }}</p>
+                    @endif
+                    <br><br>
                 @else 
-                    <div class="direction">Fill out a location above to get your closest burger!</div>
+                    <div class="direction">Fill out a location below to get your closest burger!</div>
                 @endif
                 
-                @if (substr($search, 0, 7) === 'latlon:')
-                    <p style="font-size: 12px; color: rgba(0, 0, 0, 0.5)">Current location provided by your browser.<br>{{ $search }}</p>
-                @endif
-
                 <br><br>
 
-                <div class="location-box">Where are you?
+                <div class="location-box">
+                    Where are you?
                     <form action="/search" method="POST">
                         {{ csrf_field() }}
                         <input type="text" name="location" value="{{ substr($search, 0, 7) === 'latlon:' ? '' : $search }}" autofocus id="locationBox">
