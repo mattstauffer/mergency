@@ -26,6 +26,10 @@ Route::get('{search}', function ($search) {
     // probably browser instead.. will require SSL though
     $minutes = 30;
     $results = Cache::remember('yelp:' . $search, $minutes, function () use ($client, $search) {
+        if (substr($search, 0, 7) == 'latlon:') {
+            return $client->search(['term' => 'Burgers', 'cll' => substr($search, 7)]);
+        }
+
         return $client->search(['term' => 'Burgers', 'location' => $search]);
     });
 
