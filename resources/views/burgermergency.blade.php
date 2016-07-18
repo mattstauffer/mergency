@@ -184,7 +184,7 @@
 
                 <br><br><br><br><br><br>
 
-                <div class="credits">Logo by stolkramaker for the Noun Project | <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
+                <div class="credits"><a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a></div>
             </div>
         </div>
 
