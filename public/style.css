@@ -28,8 +28,14 @@ body {
 .content {
     margin: 0 auto;
     max-width: 1500px;
-    padding: 50px;
+    padding: 25px;
 }
+
+    @media only screen and (min-width: 600px) {
+        .content {
+            padding: 50px;
+        }
+    }
 
 .burger {
     display: block;
