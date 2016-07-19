@@ -103,13 +103,64 @@
                 lon: null
             };
 
+            var toggleButton = function toggleButton(on) {
+                if (on) {
+                    document.getElementById('js-find').classList.remove('hidden');
+                } else {
+                    document.getElementById('js-find').classList.add('hidden');
+                }
+            };
+
+            var toggleLoader = function toggleLoader(on) {
+                if (on) {
+                    document.getElementById('js-find-loader').classList.remove('hidden');
+                } else {
+                    document.getElementById('js-find-loader').classList.add('hidden');
+                }
+            };
+
             var activateButton = function activateButton() {
-                document.getElementById('js-find').classList.remove('hidden');
-                document.getElementById('js-find-loader').classList.add('hidden');
+                toggleButton(true);
+                toggleLoader(false);
             };
 
             var handleButtonClick = function handleButtonClick() {
-                window.location = "/latlon:" + position.lat + "," + position.lon;
+                getLocation(function () {
+                    window.location = "/latlon:" + position.lat + "," + position.lon;
+                });
+            };
+
+            var getLocation = function getLocation(callback) {
+                var geoOptions = {
+                    maximumAge: 5 * 60 * 1000, // 5 minutes
+                    timeout: 10 * 1000, // 10 seconds
+                };
+
+                var geoSuccess = function (geoPosition) {
+                    position.lat = geoPosition.coords.latitude;
+                    position.lon = geoPosition.coords.longitude;
+
+                    callback();
+                };
+
+                var geoError = function (error) {
+                    console.log('Error occurred. Error code: ' + error.code);
+
+                    var messages = {
+                        0 : 'Unknown error getting your location.',
+                        1 : 'Permission denied getting your location.',
+                        2 : 'Position available from your browser.',
+                        3 : 'Timed out getting your location.'
+                    };
+
+                    $loader.classList.add('error-message');
+                    $loader.innerHTML = 'ERROR: ' + messages[error.code];
+
+                    toggleLoader(true);
+                    toggleButton(false);
+                };
+
+                navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
             };
 
             var $getLocationButton = document.getElementById("js-find");
@@ -123,36 +174,7 @@
             if (navigator.geolocation) {
                 console.log('Geolocation is supported!');
 
-                window.onload = function () {
-                    var geoOptions = {
-                        maximumAge: 5 * 60 * 1000, // 5 minutes
-                        timeout: 10 * 1000, // 10 seconds
-                    };
-
-                    var geoSuccess = function (geoPosition) {
-                        position.lat = geoPosition.coords.latitude;
-                        position.lon = geoPosition.coords.longitude;
-
-                        activateButton();
-                    };
-
-                    var geoError = function (error) {
-                        console.log('Error occurred. Error code: ' + error.code);
-
-                        var messages = {
-                            0 : 'Unknown error getting your location.',
-                            1 : 'Permission denied getting your location.',
-                            2 : 'Position available from your browser.',
-                            3 : 'Timed out getting your location.'
-                        };
-
-                        $loader.classList.add('error-message');
-                        $loader.innerHTML = 'ERROR: ' + messages[error.code];
-                    };
-
-                    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-                };
-
+                activateButton();
             } else {
                 console.log('Geolocation is not supported for this Browser/OS version yet');
 
