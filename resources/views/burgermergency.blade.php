@@ -65,7 +65,7 @@
                             id="locationBox"
                             placeholder="600 E Grand Ave, Chicago, IL"
                             style="width: 100%">
-                        <button>BURGER ME!</button>
+                        <button id="burgerMe">BURGER ME!</button>
                     </form>
 
                     <a class="js-find hidden" id="js-find">Get my browser location</a>
@@ -103,21 +103,24 @@
                 lon: null
             };
 
-            var $button = document.getElementById('js-find');
+            var $loader = document.getElementById('js-find-loader');
+            var $locationButton = document.getElementById('js-find');
+            var $burgerMeButton = document.getElementById('burgerMe');
+            var $location = document.getElementById('locationBox');
 
             var toggleButton = function toggleButton(on) {
                 if (on) {
-                    $button.classList.remove('hidden');
+                    $locationButton.classList.remove('hidden');
                 } else {
-                    $button.classList.add('hidden');
+                    $locationButton.classList.add('hidden');
                 }
             };
 
             var toggleLoader = function toggleLoader(on) {
                 if (on) {
-                    document.getElementById('js-find-loader').classList.remove('hidden');
+                    $loader.classList.remove('hidden');
                 } else {
-                    document.getElementById('js-find-loader').classList.add('hidden');
+                    $loader.classList.add('hidden');
                 }
             };
 
@@ -126,8 +129,18 @@
                 toggleLoader(false);
             };
 
+            var handleBurgerMeButton = function handleBurgerMeButton() {
+                // Check for empty
+                if ($location.value == '') {
+                    alert('Gotta enter something into the box first, slugger.');
+                    return false;
+                }
+
+                return true;
+            };
+
             var handleButtonClick = function handleButtonClick() {
-                $button.innerHTML = "Loading...";
+                $locationButton.innerHTML = "Loading...";
 
                 getLocation(function () {
                     window.location = "/latlon:" + position.lat + "," + position.lon;
@@ -167,13 +180,14 @@
                 navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
             };
 
-            var $getLocationButton = document.getElementById("js-find");
-            var $loader = document.getElementById('js-find-loader');
-
-            $getLocationButton.onclick = function () {
+            $locationButton.onclick = function () {
                 handleButtonClick();
                 return false;
-            }
+            };
+
+            $burgerMeButton.onclick = function () {
+                return handleBurgerMeButton();
+            };
 
             if (navigator.geolocation) {
                 console.log('Geolocation is supported!');
