@@ -46,7 +46,7 @@ body {
 
 .title {
     font-weight: normal;
-    font-size: 9vw;
+    font-size: 8vw;
     margin: 0;
 }
 
@@ -87,16 +87,23 @@ body {
 
     .location-box input, .location-box button {
         border: 2px solid #111;
+        border-radius: 0.25em;
         font-size: 1.5rem;
         padding: 0.25em;
     }
 
     .location-box button, .js-find {
         background: #e5c202;
+        border-radius: 0.25em;
         display: inline-block;
         font-size: 1.75rem;
         margin: 0.5em auto;
         padding: 0.5em 1em;
+    }
+
+    .location-box button {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 
     @media only screen and (min-width: 600px) {
@@ -105,13 +112,17 @@ body {
         }
 
         .location-box input {
-            font-size: 2.2trem;
+            font-size: 2rem;
+        }
+
+        .location-box button {
+            font-size: 2rem;
         }
     }
 
 .js-find {
     background: #eee;
-    border: 1px solid #555;
+    border: 1px solid #999;
     cursor: pointer;
     font-size: 1.25rem;
     margin-top: 2em;

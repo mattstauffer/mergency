@@ -103,11 +103,13 @@
                 lon: null
             };
 
+            var $button = document.getElementById('js-find');
+
             var toggleButton = function toggleButton(on) {
                 if (on) {
-                    document.getElementById('js-find').classList.remove('hidden');
+                    $button.classList.remove('hidden');
                 } else {
-                    document.getElementById('js-find').classList.add('hidden');
+                    $button.classList.add('hidden');
                 }
             };
 
@@ -125,6 +127,8 @@
             };
 
             var handleButtonClick = function handleButtonClick() {
+                $button.innerHTML = "Loading...";
+
                 getLocation(function () {
                     window.location = "/latlon:" + position.lat + "," + position.lon;
                 });
