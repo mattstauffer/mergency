@@ -10,13 +10,22 @@ Route::get('/', function () {
 Route::get('{search}', function ($search, App\YelpClient $yelp) {
     $minutes = 30;
 
-    $results = Cache::remember('yelp:' . $search, $minutes, function () use ($yelp, $search) {
-        if (substr($search, 0, 7) == 'latlon:') {
-            return $yelp->searchByLl(substr($search, 7), ['term' => 'Burgers']);
+    try {
+        $results = Cache::remember('yelp:' . $search, $minutes, function () use ($yelp, $search) {
+            if (substr($search, 0, 7) == 'latlon:') {
+                return $yelp->searchByLl(substr($search, 7), ['term' => 'Burgers']);
+            }
+
+            return $yelp->search(['term' => 'Burgers', 'location' => $search]);
+        });
+    } catch (Exception $e) {
+        // @todo: Log and improve these
+        if (strpos($e->getMessage(), 'UNAVAILABLE_FOR_LOCATION') !== false) {
+            return 'Sorry, this service does not work in your current location. <a href="/">Back</a>';
         }
 
-        return $yelp->search(['term' => 'Burgers', 'location' => $search]);
-    });
+        return 'Sorry, there has been an unexpected error. <a href="/">Back</a>';
+    }
 
     // Only businesses that have not been permanently closed
     $shops = collect($results->businesses)->reject(function ($shop) {
