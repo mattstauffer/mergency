@@ -20,6 +20,8 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
         <meta name="twitter:title" content="It's a Burgermergency!!!">
