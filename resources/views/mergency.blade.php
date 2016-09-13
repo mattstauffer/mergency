@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{ $shops->isEmpty() ? '' : $shops->first()->name . ' | ' }}Burgermergency</title>
+        <title>{{ $shops->isEmpty() ? '' : $shops->first()->name . ' | ' }}Mergency</title>
         <!--
             If you're reading this, I'm sorry.
 
@@ -24,17 +24,17 @@
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
-        <meta name="twitter:title" content="It's a Burgermergency!!!">
-        <meta name="twitter:description" content="If you have a burgermergency, you need to find the nearest burger--stat!.">
-        <meta name="twitter:image" content="http://burgermergency.com/twitter-burger.png">
+        <meta name="twitter:title" content="It's a {{ $term }}mergency!!!">
+        <meta name="twitter:description" content="If you have a {{ $term }}mergency, you need to find the nearest {{ $term }}--stat!.">
+        <meta name="twitter:image" content="http://mergency.io/twitter-logo.png">
         <meta name="twitter:creator" content="@stauffermatt">
 
         <meta property="og:locale" content="en_US">
-        <meta property="og:title" content="It's a Burgermergency!!!">
-        <meta property="og:description" content="If you have a burgermergency, you need to find the nearest burger--stat!">
+        <meta property="og:title" content="It's a {{ $term }}mergency!!!">
+        <meta property="og:description" content="If you have a {{ $term }}mergency, you need to find the nearest {{ $term }}--stat!">
         <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:site_name" content="Matt Stauffer">
-        <meta property="og:image" content="http://burgermergency.com/og-burger.png">
+        <meta property="og:image" content="http://mergency.io/og-logo.png">
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
 
@@ -44,14 +44,14 @@
     <body>
         <div class="container">
             <div class="content">
-                <img src="burger.png" class="burger" alt="Burger">
+                <img src="logo.png" class="logo" alt="Logo">
 
-                <h1 class="title">It's a burgermergency!</h1>
+                <h1 class="title">It's a <strong>{{ $term }}</strong>mergency!</h1>
 
                 @if ($search)
                     @include('partials.restaurant', ['restaurant' => $shops->first()])
                 @else
-                    <div class="restaurant">Fill out a location below to get your closest burger!</div>
+                    <div class="restaurant">Fill out a location below to get your closest <strong>{{ $term }}</strong>!</div>
                 @endif
 
                 <div class="location-box">
@@ -67,7 +67,7 @@
                             id="locationBox"
                             placeholder="600 E Grand Ave, Chicago, IL"
                             style="width: 100%">
-                        <button id="burgerMe">BURGER ME!</button>
+                        <button id="foodMe">{{ strtoupper($term) }} ME!</button>
                     </form>
 
                     <a class="js-find hidden" id="js-find">Get my browser location</a>
@@ -86,7 +86,7 @@
                 --}}
 
                 <div class="credits">
-                    <a href="https://github.com/mattstauffer/burgermergency">Project on GitHub</a>
+                    <a href="https://github.com/mattstauffer/mergency">Project on GitHub</a>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
 
             var $loader = document.getElementById('js-find-loader');
             var $locationButton = document.getElementById('js-find');
-            var $burgerMeButton = document.getElementById('burgerMe');
+            var $foodMeButton = document.getElementById('foodMe');
             var $location = document.getElementById('locationBox');
 
             var toggleButton = function toggleButton(on) {
@@ -131,7 +131,7 @@
                 toggleLoader(false);
             };
 
-            var handleBurgerMeButton = function handleBurgerMeButton() {
+            var handleFoodMeButton = function handleFoodMeButton() {
                 // Check for empty
                 if ($location.value == '') {
                     alert('Gotta enter something into the box first, slugger.');
@@ -187,8 +187,8 @@
                 return false;
             };
 
-            $burgerMeButton.onclick = function () {
-                return handleBurgerMeButton();
+            $foodMeButton.onclick = function () {
+                return handleFoodMeButton();
             };
 
             if (navigator.geolocation) {
