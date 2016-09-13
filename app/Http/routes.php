@@ -38,9 +38,12 @@ Route::group(['domain' => "{term}.{$tld}"], function () use ($tld) {
             return 'Sorry, there has been an unexpected error. <a href="/">Back</a>';
         }
 
-        // Only businesses that have not been permanently closed
         $shops = collect($results->businesses)->reject(function ($shop) {
+            // Only businesses that have not been permanently closed
             return $shop->is_closed;
+        })->reject(function ($shop) {
+            // Only businesses with an actual address (some just have a vague display address)
+            return empty($shop->location->address);
         });
 
         return view('mergency')
