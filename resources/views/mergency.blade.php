@@ -49,7 +49,11 @@
                 <h1 class="title">It's a <strong>{{ $term }}</strong>mergency!</h1>
 
                 @if ($search)
-                    @include('partials.restaurant', ['restaurant' => $shops->first()])
+                    @if ($shops->isEmpty())
+                        <h2>Well, this is awkward. We couldn't find anything.</h2>
+                    @else
+                        @include('partials.restaurant', ['restaurant' => $shops->first()])
+                    @endif
                 @else
                     <div class="restaurant">Fill out a location below to get your closest <strong>{{ $term }}</strong>!</div>
                 @endif
