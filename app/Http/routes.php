@@ -2,8 +2,14 @@
 
 $tld = parse_url(config('app.url'), PHP_URL_HOST);
 
+function prepareTerm($term)
+{
+    return str_replace(['-', '_'], [' ', ' '], $term);
+}
+
 Route::group(['domain' => "{term}.{$tld}"], function () use ($tld) {
     Route::get('/', function ($term) {
+        $term = prepareTerm($term);
         return view('mergency')
             ->with('term', $term)
             ->with('results', null)
@@ -13,6 +19,7 @@ Route::group(['domain' => "{term}.{$tld}"], function () use ($tld) {
 
     Route::get('{search}', function ($term, $locationSearch, App\YelpClient $yelp) {
         $minutes = 30;
+        $term = prepareTerm($term);
 
         try {
             $results = Cache::remember('yelp:' . $locationSearch . ':' . $term, $minutes, function () use ($yelp, $locationSearch, $term) {
