@@ -24,14 +24,14 @@
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@stauffermatt">
-        <meta name="twitter:title" content="It's a {{ $term }}mergency!!!">
-        <meta name="twitter:description" content="If you have a {{ $term }}mergency, you need to find the nearest {{ $term }}--stat!.">
+        <meta name="twitter:title" content="It's a {food}mergency!!!">
+        <meta name="twitter:description" content="If you have a {food}mergency, you need to find the nearest {food}--stat!.">
         <meta name="twitter:image" content="http://mergency.io/twitter-logo.png">
         <meta name="twitter:creator" content="@stauffermatt">
 
         <meta property="og:locale" content="en_US">
-        <meta property="og:title" content="It's a {{ $term }}mergency!!!">
-        <meta property="og:description" content="If you have a {{ $term }}mergency, you need to find the nearest {{ $term }}--stat!">
+        <meta property="og:title" content="It's a {food}mergency!!!">
+        <meta property="og:description" content="If you have a {food}mergency, you need to find the nearest {food}--stat!">
         <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:site_name" content="Matt Stauffer">
         <meta property="og:image" content="http://mergency.io/og-logo.png">
