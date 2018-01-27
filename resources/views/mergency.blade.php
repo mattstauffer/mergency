@@ -172,7 +172,7 @@
                     var messages = {
                         0 : 'Unknown error getting your location.',
                         1 : 'Permission denied getting your location.',
-                        2 : 'Position available from your browser.',
+                        2 : 'Position not available from your browser.',
                         3 : 'Timed out getting your location.'
                     };
 
